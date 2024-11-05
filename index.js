@@ -1,6 +1,6 @@
 
 // const master = prompt("Give your name")
-const master = "Chaitanya"
+
 ///////////background wallpaper
 
 fetch("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature")
@@ -49,6 +49,7 @@ setInterval(getCurrentTime, 1000)
 function getCurrentHour(){
     const date = new Date()
     const hour = date.getHours()
+    const master = "Chaitanya"
     let greeting_msg = ""
     if(hour > 3 && hour < 11  ){
         greeting_msg = `Good morning, ${master}.`
