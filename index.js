@@ -30,16 +30,34 @@ fetch("https://api.coingecko.com/api/v3/coins/dogecoin")
         `
     })
     .catch(err => console.error(err))
-
+    
 function getCurrentTime() {
     const date = new Date()
-    document.getElementById("time").textContent = date.toLocaleTimeString("en-us", {timeStyle: "short"})
+    getCurrentHour()
+    document.getElementById("time").textContent = date.toLocaleTimeString("en-US", { timeStyle: "medium", hour12: false });
 }
 
 setInterval(getCurrentTime, 1000)
 
+function getCurrentHour(){
+    const date = new Date()
+    const hour = date.getHours()
+    let greeting_msg = ""
+    if(hour > 3 && hour < 11  ){
+        greeting_msg = "Good morning, Master."
+    }else if(hour > 11 && hour < 15){
+        greeting_msg = "Good afternoon, Master."
+    }else if(hour > 15 && hour < 18 ){
+        greeting_msg = "Good evening, Master."
+    }else{
+        greeting_msg = "Good night, Master."
+    }
+    document.getElementById('greeting').textContent = greeting_msg;
+}
+
 navigator.geolocation.getCurrentPosition(position => {
-    fetch(`https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=imperial`)
+    
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=imperial&appid={API_key}`)
         .then(res => {
             if (!res.ok) {
                 throw Error("Weather data not available")
