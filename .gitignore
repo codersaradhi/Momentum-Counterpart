@@ -1,0 +1,13 @@
+# Ignore sensitive API keys
+*.env
+secrets.json
+config.js
+
+# Ignore node_modules folder (if using Node.js)
+node_modules/
+
+# Ignore build artifacts (if any)
+dist/
+
+# Ignore .vscode settings
+.vscode/

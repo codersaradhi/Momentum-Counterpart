@@ -1,3 +1,8 @@
+
+// const master = prompt("Give your name")
+const master = "Chaitanya"
+///////////background wallpaper
+
 fetch("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature")
     .then(res => res.json())
     .then(data => {
@@ -11,6 +16,7 @@ fetch("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&que
 		document.getElementById("author").textContent = `By: Dodi Achmad`
     })
 
+//crypto updates api
 fetch("https://api.coingecko.com/api/v3/coins/dogecoin")
     .then(res => {
         if (!res.ok) {
@@ -30,7 +36,8 @@ fetch("https://api.coingecko.com/api/v3/coins/dogecoin")
         `
     })
     .catch(err => console.error(err))
-    
+
+// time update
 function getCurrentTime() {
     const date = new Date()
     getCurrentHour()
@@ -44,33 +51,30 @@ function getCurrentHour(){
     const hour = date.getHours()
     let greeting_msg = ""
     if(hour > 3 && hour < 11  ){
-        greeting_msg = "Good morning, Master."
+        greeting_msg = `Good morning, ${master}.`
     }else if(hour > 11 && hour < 15){
-        greeting_msg = "Good afternoon, Master."
+        greeting_msg = `Good afternoon, ${master}.`
     }else if(hour > 15 && hour < 18 ){
-        greeting_msg = "Good evening, Master."
+        greeting_msg = `Good evening, ${master}.`
     }else{
-        greeting_msg = "Good night, Master."
+        greeting_msg = `Good night, ${master}.`
     }
     document.getElementById('greeting').textContent = greeting_msg;
 }
 
-navigator.geolocation.getCurrentPosition(position => {
-    
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=imperial&appid={API_key}`)
-        .then(res => {
-            if (!res.ok) {
-                throw Error("Weather data not available")
-            }
-            return res.json()
-        })
-        .then(data => {
-            const iconUrl = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
-            document.getElementById("weather").innerHTML = `
-                <img src=${iconUrl} />
-                <p class="weather-temp">${Math.round(data.main.temp)}º</p>
-                <p class="weather-city">${data.name}</p>
-            `
-        })
-        .catch(err => console.error(err))
+// weather api
+navigator.geolocation.getCurrentPosition(async position => {
+    const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=imperial&appid={API_key}`)
+    console.log(res)
+    if (!res.ok) {
+        throw Error("Weather data not available")
+    }
+    const data = await res.json()
+    const iconUrl = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
+    document.getElementById("weather").innerHTML = `
+        <img src=${iconUrl} />
+        <p class="weather-temp">${Math.round(data.main.temp)}º</p>
+        <p class="weather-city">${data.name}</p>
+    `
+        // .catch(err => console.error(err))
 });
