@@ -40,7 +40,7 @@ fetch("https://api.coingecko.com/api/v3/coins/dogecoin")
 // time update
 function getCurrentTime() {
     const date = new Date()
-    getCurrentHour()
+    // getCurrentHour()
     document.getElementById("time").textContent = date.toLocaleTimeString("en-US", { timeStyle: "medium", hour12: false });
 }
 
