@@ -57,9 +57,10 @@ function getCurrentHour(){
         greeting_msg = `Good afternoon, ${master}.`
     }else if(hour > 15 && hour < 18 ){
         greeting_msg = `Good evening, ${master}.`
-    }else if(hour > 19 && hour < 23){
-        greeting_msg = `Good night, ${master}.`
     }
+    // else if(hour > 19 && hour < 23){
+    //     greeting_msg = `Good night, ${master}.`
+    // }
     document.getElementById('greeting').textContent = greeting_msg;
 }
 
